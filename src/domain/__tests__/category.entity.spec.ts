@@ -1,7 +1,7 @@
 import { Category } from "../category.entity";
 
 describe("Category unit tests", () => {
-  test("constructor", () => {
+  test("should create a category with name prop", () => {
     const created_at = new Date();
 
     let category = new Category({
@@ -13,8 +13,12 @@ describe("Category unit tests", () => {
     expect(category.description).toBeNull();
     expect(category.is_active).toBeTruthy();
     expect(category.created_at).toBeInstanceOf(Date);
+  });
 
-    category = new Category({
+  it("should create a category with name and description props", () => {
+    const created_at = new Date();
+
+    const category = new Category({
       name: "Movie",
       description: "Movie description",
       is_active: false,
