@@ -6,6 +6,7 @@ import {
   validateSync,
 } from "class-validator";
 import { Category } from "./category.entity";
+import { ClassValidatorFields } from "../shared/validators/class-validator-fields";
 
 export class CategoryRules {
   @Max(255)
@@ -27,8 +28,14 @@ export class CategoryRules {
   }
 }
 
-export class CategoryValidator {
+export class CategoryValidator extends ClassValidatorFields<CategoryRules> {
   validate(category: Category) {
-    validateSync();
+    return super.validate(new CategoryRules(category));
+  }
+}
+
+export class CategoryValidatorFactory {
+  static create() {
+    return new CategoryValidator();
   }
 }
