@@ -2,6 +2,12 @@ import { Uuid } from "../../shared/domain/value-objects/uuid.vo";
 import { Category } from "../category.entity";
 
 describe("Category unit tests", () => {
+  let validateSpy: any;
+
+  beforeEach(() => {
+    validateSpy = jest.spyOn(Category, "validate");
+  });
+
   test("should create a category with name prop", () => {
     const created_at = new Date();
 
@@ -34,25 +40,33 @@ describe("Category unit tests", () => {
   });
 
   test("should change category name", () => {
-    const category = new Category({
+    const category = Category.create({
       name: "Movie",
     });
 
     category.changeName("New Movie");
     expect(category.name).toBe("New Movie");
+    expect(validateSpy).toHaveBeenCalled();
   });
 
   it("should change category description", () => {
-    const category = new Category({
+    const category = Category.create({
       name: "Movie",
     });
 
     category.changeDescription("New description");
     expect(category.description).toBe("New description");
+    expect(validateSpy).toHaveBeenCalled();
   });
 });
 
 describe("create command", () => {
+  let validateSpy: any;
+
+  beforeEach(() => {
+    validateSpy = jest.spyOn(Category, "validate");
+  });
+
   test("shoud create a category", () => {
     const category = Category.create({
       name: "Movie",
@@ -63,6 +77,7 @@ describe("create command", () => {
     expect(category.description).toBeNull();
     expect(category.is_active).toBeTruthy();
     expect(category.created_at).toBeInstanceOf(Date);
+    expect(validateSpy).toHaveBeenCalledTimes(1);
   });
 
   test("should create a category with description", () => {
@@ -76,6 +91,7 @@ describe("create command", () => {
     expect(category.description).toBe("Movie description");
     expect(category.is_active).toBeTruthy();
     expect(category.created_at).toBeInstanceOf(Date);
+    expect(validateSpy).toHaveBeenCalledTimes(1);
   });
 
   test("should create a category with is_active = false", () => {
@@ -89,6 +105,7 @@ describe("create command", () => {
     expect(category.description).toBeNull();
     expect(category.is_active).toBeFalsy();
     expect(category.created_at).toBeInstanceOf(Date);
+    expect(validateSpy).toHaveBeenCalledTimes(1);
   });
 });
 
