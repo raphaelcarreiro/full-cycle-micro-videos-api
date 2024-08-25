@@ -1,21 +1,21 @@
 import {
   IsBoolean,
   IsNotEmpty,
+  IsOptional,
   IsString,
   Max,
   validateSync,
 } from "class-validator";
 import { Category } from "./category.entity";
+import { ClassValidatorFields } from "../shared/domain/validators/class-validator-fields";
 
 export class CategoryRules {
-  @Max(255)
   @IsString()
   @IsNotEmpty()
   name: string;
 
-  @Max(255)
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   description: string;
 
   @IsBoolean()
@@ -27,8 +27,14 @@ export class CategoryRules {
   }
 }
 
-export class CategoryValidator {
+export class CategoryValidator extends ClassValidatorFields<CategoryRules> {
   validate(category: Category) {
-    validateSync();
+    return super.validate(new CategoryRules(category));
+  }
+}
+
+export class CategoryValidatorFactory {
+  static create() {
+    return new CategoryValidator();
   }
 }
