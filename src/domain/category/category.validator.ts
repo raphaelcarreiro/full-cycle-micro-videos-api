@@ -7,7 +7,7 @@ import {
   validateSync,
 } from "class-validator";
 import { Category } from "./category.entity";
-import { ClassValidatorFields } from "../shared/domain/validators/class-validator-fields";
+import { ClassValidatorFields } from "../../shared/domain/validators/class-validator-fields";
 
 export class CategoryRules {
   @IsString()
