@@ -1,4 +1,5 @@
 import { Entity } from "../../../domain/entity";
+import { NotFoundError } from "../../../domain/errors/not-found.error";
 import { IRepository } from "../../../domain/repository/repository.interface";
 import { ValueObject } from "../../../domain/value-object";
 
@@ -18,10 +19,10 @@ export abstract class InMemoryRepository<
   }
 
   async update(entity: E): Promise<void> {
-    const item = this.findById(entity.entity_id);
+    const item = await this.findById(entity.entity_id);
 
     if (!item) {
-      throw new Error("Entity not found");
+      throw new NotFoundError(entity.entity_id, this.getEntity());
     }
 
     this.items = this.items.map((item) => {
@@ -34,13 +35,13 @@ export abstract class InMemoryRepository<
   }
 
   async delete(entityId: EntityId): Promise<void> {
-    const item = this.findById(entityId);
+    const item = await this.findById(entityId);
 
     if (!item) {
-      throw new Error("Entity not found");
+      throw new NotFoundError(entityId, this.getEntity());
     }
 
-    this.items.filter((item) => !item.entity_id.equals(entityId));
+    this.items = this.items.filter((item) => !item.entity_id.equals(entityId));
   }
 
   async findById(entityId: EntityId | ValueObject): Promise<E | null> {
