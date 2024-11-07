@@ -24,13 +24,17 @@ export class SearchResult<E extends Entity = Entity> extends ValueObject {
     this.last_page = Math.ceil(props.total / props.per_page);
   }
 
-  toJSON() {
+  toJSON(forceEntity = false) {
     return {
-      items: this.items,
+      items: forceEntity ? this.entitiesToJSON(this.items) : this.items,
       total: this.total,
       current_page: this.current_page,
       per_page: this.per_page,
       last_page: this.last_page,
     };
+  }
+
+  entitiesToJSON(entities: Entity[]) {
+    return entities.map((entity) => entity.toJSON());
   }
 }
