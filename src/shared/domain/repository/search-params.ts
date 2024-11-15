@@ -1,6 +1,6 @@
-import { ValueObject } from "../value-object";
+import { ValueObject } from '../value-object';
 
-export type SortDirection = "asc" | "desc";
+export type SortDirection = 'asc' | 'desc';
 
 export type SearchParamsConstructorProps<Filter = string> = {
   page?: number | null;
@@ -17,13 +17,13 @@ export class SearchParams<Filter = string> extends ValueObject {
   protected _sort_direction: SortDirection | null = null;
   protected _filter: Filter | null = null;
 
-  constructor(props: SearchParamsConstructorProps<Filter>) {
+  constructor(props?: SearchParamsConstructorProps<Filter>) {
     super();
-    this.page = props.page;
-    this.per_page = props.per_page;
-    this.sort = props.sort;
-    this.sort_direction = props.sort_direction;
-    this.filter = props.filter;
+    this.page = props?.page;
+    this.per_page = props?.per_page;
+    this.sort = props?.sort;
+    this.sort_direction = props?.sort_direction;
+    this.filter = props?.filter;
   }
 
   get page(): number | null {
@@ -74,7 +74,7 @@ export class SearchParams<Filter = string> extends ValueObject {
 
     value = `${value}`.toLowerCase() as SortDirection;
 
-    this._sort_direction = value !== "asc" && value !== "desc" ? "asc" : value;
+    this._sort_direction = value !== 'asc' && value !== 'desc' ? 'asc' : value;
   }
 
   get filter(): Filter | null {

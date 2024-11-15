@@ -1,4 +1,6 @@
 import { Entity } from '../../../../domain/entity';
+import { SearchParams } from '../../../../domain/repository/search-params';
+import { SearchResult } from '../../../../domain/repository/search-result';
 import { Uuid } from '../../../../domain/value-objects/uuid.vo';
 import { SearchableInMemoryRepository } from '../searchable-in-memory.repository';
 
@@ -93,7 +95,7 @@ describe('SearchableInMemoryRepository tests', () => {
 
     const items = [entity1, entity2];
 
-    const sorted = await repository['applySort'](items, null, null);
+    const sorted = repository['applySort'](items, null, null);
 
     expect(sorted).toStrictEqual([entity1, entity2]);
   });
@@ -104,7 +106,7 @@ describe('SearchableInMemoryRepository tests', () => {
 
     const items = [entity1, entity2];
 
-    const sorted = await repository['applySort'](items, 'name', 'asc');
+    const sorted = repository['applySort'](items, 'name', 'asc');
 
     expect(sorted).toStrictEqual([entity2, entity1]);
   });
@@ -140,5 +142,72 @@ describe('SearchableInMemoryRepository tests', () => {
 
     paginated = repository['applyPaginate'](items, 10, 2);
     expect(paginated).toStrictEqual([]);
+  });
+
+  it('should only apply pagination on search when params props are null', async () => {
+    const entity = new StubEntity({ name: 'Raphael', price: 10 });
+
+    repository.items = Array(16).fill(entity);
+
+    const result = await repository.search(new SearchParams());
+
+    expect(result).toStrictEqual(
+      new SearchResult({
+        items: Array(15).fill(entity),
+        total: 16,
+        current_page: 1,
+        per_page: 15,
+      }),
+    );
+  });
+
+  it('should apply pagination and filter on search method', async () => {
+    const entity = new StubEntity({ name: 'Raphael', price: 10 });
+
+    repository.items = Array(16).fill(entity);
+
+    const result = await repository.search(
+      new SearchParams({
+        filter: 'Raphael',
+      }),
+    );
+
+    expect(result).toStrictEqual(
+      new SearchResult({
+        items: Array(15).fill(entity),
+        total: 16,
+        current_page: 1,
+        per_page: 15,
+      }),
+    );
+  });
+
+  it('should apply pagination, filter and sort on search method', async () => {
+    const items = [
+      new StubEntity({ name: 'Raphael', price: 10 }),
+      new StubEntity({ name: 'Jorge', price: 10 }),
+      new StubEntity({ name: 'Susi', price: 10 }),
+      new StubEntity({ name: 'Camila', price: 10 }),
+      new StubEntity({ name: 'Mayara', price: 10 }),
+    ];
+
+    repository.items = items;
+
+    const result = await repository.search(
+      new SearchParams({
+        filter: null,
+        sort: 'name',
+        sort_direction: 'asc',
+      }),
+    );
+
+    expect(result).toStrictEqual(
+      new SearchResult({
+        items: [items[3], items[1], items[4], items[0], items[2]],
+        total: 5,
+        current_page: 1,
+        per_page: 15,
+      }),
+    );
   });
 });
