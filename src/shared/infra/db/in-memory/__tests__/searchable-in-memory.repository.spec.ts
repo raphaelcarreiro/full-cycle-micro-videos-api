@@ -93,8 +93,52 @@ describe('SearchableInMemoryRepository tests', () => {
 
     const items = [entity1, entity2];
 
-    const itemsFiltered = await repository['applySort'](items, null, 'asc');
+    const sorted = await repository['applySort'](items, null, null);
 
-    expect(itemsFiltered).toStrictEqual([entity2, entity1]);
+    expect(sorted).toStrictEqual([entity1, entity2]);
+  });
+
+  it('should sort by name and asc direction', async () => {
+    const entity1 = new StubEntity({ name: 'Raphael', price: 10.5 });
+    const entity2 = new StubEntity({ name: 'Camila', price: 20 });
+
+    const items = [entity1, entity2];
+
+    const sorted = await repository['applySort'](items, 'name', 'asc');
+
+    expect(sorted).toStrictEqual([entity2, entity1]);
+  });
+
+  it('should sort name asc direction when sortDir is null', async () => {
+    const entity1 = new StubEntity({ name: 'Raphael', price: 10.5 });
+    const entity2 = new StubEntity({ name: 'Camila', price: 20 });
+
+    const items = [entity1, entity2];
+
+    const sorted = repository['applySort'](items, 'name', null);
+
+    expect(sorted).toStrictEqual([entity1, entity2]);
+  });
+
+  it('should paginate', async () => {
+    const entity1 = new StubEntity({ name: 'Raphael', price: 10 });
+    const entity2 = new StubEntity({ name: 'Camila', price: 12 });
+    const entity3 = new StubEntity({ name: 'Jorge', price: 13 });
+    const entity4 = new StubEntity({ name: 'Susi', price: 15 });
+    const entity5 = new StubEntity({ name: 'Mayara', price: 16 });
+
+    const items = [entity1, entity2, entity3, entity4, entity5];
+
+    let paginated = repository['applyPaginate'](items, 1, 2);
+    expect(paginated).toStrictEqual([entity1, entity2]);
+
+    paginated = repository['applyPaginate'](items, 2, 3);
+    expect(paginated).toStrictEqual([entity4, entity5]);
+
+    paginated = repository['applyPaginate'](items, 3, 2);
+    expect(paginated).toStrictEqual([entity5]);
+
+    paginated = repository['applyPaginate'](items, 10, 2);
+    expect(paginated).toStrictEqual([]);
   });
 });
