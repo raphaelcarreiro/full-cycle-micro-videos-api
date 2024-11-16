@@ -9,7 +9,7 @@ describe('CategoryInMemoryRepository tests', () => {
   });
 
   it('should not filter when filter is null', async () => {
-    const items = [Category.create({ name: 'category a' })];
+    const items = [Category.fake().aCategory().build()];
 
     const filtered = await repository['applyFilter'](items, null);
 
@@ -18,9 +18,9 @@ describe('CategoryInMemoryRepository tests', () => {
 
   it('should filter by name', async () => {
     const items = [
-      new Category({ name: 'category a' }),
-      new Category({ name: 'category b' }),
-      new Category({ name: 'category c' }),
+      Category.fake().aCategory().withName('category a').build(),
+      Category.fake().aCategory().withName('category b').build(),
+      Category.fake().aCategory().withName('category c').build(),
     ];
 
     const filtered = await repository['applyFilter'](items, 'category c');
@@ -29,9 +29,9 @@ describe('CategoryInMemoryRepository tests', () => {
   });
 
   it('should sort by createdAt desc when sort props is null', async () => {
-    const entitya = new Category({ name: 'category a', created_at: new Date('2024-11-15') });
-    const entityb = new Category({ name: 'category b', created_at: new Date('2024-11-16') });
-    const entityc = new Category({ name: 'category c', created_at: new Date('2024-11-17') });
+    const entitya = Category.fake().aCategory().withCreatedAt(new Date('2024-11-15')).build();
+    const entityb = Category.fake().aCategory().withCreatedAt(new Date('2024-11-16')).build();
+    const entityc = Category.fake().aCategory().withCreatedAt(new Date('2024-11-17')).build();
 
     const items = [entitya, entityb, entityc];
 
@@ -42,9 +42,9 @@ describe('CategoryInMemoryRepository tests', () => {
 
   it('should sort by name desc', async () => {
     const items = [
-      new Category({ name: 'category a' }),
-      new Category({ name: 'category b' }),
-      new Category({ name: 'category c' }),
+      Category.fake().aCategory().withName('category a').build(),
+      Category.fake().aCategory().withName('category b').build(),
+      Category.fake().aCategory().withName('category c').build(),
     ];
 
     const filtered = repository['applySort'](items, 'name', 'desc');
@@ -54,9 +54,9 @@ describe('CategoryInMemoryRepository tests', () => {
 
   it('should sort by name asc', async () => {
     const items = [
-      new Category({ name: 'category b' }),
-      new Category({ name: 'category a' }),
-      new Category({ name: 'category c' }),
+      Category.fake().aCategory().withName('category b').build(),
+      Category.fake().aCategory().withName('category a').build(),
+      Category.fake().aCategory().withName('category c').build(),
     ];
 
     const filtered = repository['applySort'](items, 'name', 'asc');
@@ -66,9 +66,9 @@ describe('CategoryInMemoryRepository tests', () => {
 
   it('should sort asc when sortDir is null', async () => {
     const items = [
-      new Category({ name: 'category b' }),
-      new Category({ name: 'category a' }),
-      new Category({ name: 'category c' }),
+      Category.fake().aCategory().withName('category b').build(),
+      Category.fake().aCategory().withName('category a').build(),
+      Category.fake().aCategory().withName('category c').build(),
     ];
 
     const filtered = repository['applySort'](items, 'name', null);
