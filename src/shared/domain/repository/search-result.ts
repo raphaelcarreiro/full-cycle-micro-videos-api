@@ -1,5 +1,5 @@
-import { Entity } from "../entity";
-import { ValueObject } from "../value-object";
+import { Entity } from '../entity';
+import { ValueObject } from '../value-object';
 
 type SearchResultProps<E extends Entity> = {
   items: E[];
@@ -24,9 +24,9 @@ export class SearchResult<E extends Entity = Entity> extends ValueObject {
     this.last_page = Math.ceil(props.total / props.per_page);
   }
 
-  toJSON(forceEntity = false) {
+  toJSON(options: { forceEntity: boolean } = { forceEntity: false }) {
     return {
-      items: forceEntity ? this.entitiesToJSON(this.items) : this.items,
+      items: options.forceEntity ? this.entitiesToJSON(this.items) : this.items,
       total: this.total,
       current_page: this.current_page,
       per_page: this.per_page,
@@ -35,6 +35,6 @@ export class SearchResult<E extends Entity = Entity> extends ValueObject {
   }
 
   entitiesToJSON(entities: Entity[]) {
-    return entities.map((entity) => entity.toJSON());
+    return entities.map(entity => entity.toJSON());
   }
 }
