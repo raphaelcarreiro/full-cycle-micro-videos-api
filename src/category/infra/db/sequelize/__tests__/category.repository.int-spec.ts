@@ -5,21 +5,14 @@ import { Category } from '../../../../domain/category.entity';
 import { NotFoundError } from '../../../../../shared/domain/errors/not-found.error';
 import { CategorySearchParams } from '../../../../domain/category.repository.interface';
 import { Uuid } from '../../../../../shared/domain/value-objects/uuid.vo';
+import { setupSequelize } from '../../../testing/helpers';
 
 describe('CategoryRepository integration tests', () => {
-  let sequelize: Sequelize;
+  setupSequelize({ models: [CategoryModel] });
+
   let repository: CategoryRepository;
 
   beforeEach(async () => {
-    sequelize = new Sequelize({
-      dialect: 'sqlite',
-      storage: ':memory:',
-      models: [CategoryModel],
-      logging: false,
-    });
-
-    await sequelize.sync({ force: true });
-
     repository = new CategoryRepository(CategoryModel);
   });
 

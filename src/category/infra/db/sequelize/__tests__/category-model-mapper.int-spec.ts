@@ -3,20 +3,10 @@ import { CategoryModel } from '../category.model';
 import { CategoryModelMapper } from '../category-model-mapper';
 import { Uuid } from '../../../../../shared/domain/value-objects/uuid.vo';
 import { Category } from '../../../../domain/category.entity';
+import { setupSequelize } from '../../../testing/helpers';
 
 describe('CategoryModelMapper tests', () => {
-  let sequelize: Sequelize;
-
-  beforeEach(async () => {
-    sequelize = new Sequelize({
-      dialect: 'sqlite',
-      storage: ':memory:',
-      models: [CategoryModel],
-      logging: false,
-    });
-
-    await sequelize.sync({ force: true });
-  });
+  setupSequelize({ models: [CategoryModel] });
 
   it('should map from model to entity', () => {
     const model = CategoryModel.build({
