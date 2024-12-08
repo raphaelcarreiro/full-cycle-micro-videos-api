@@ -1,8 +1,9 @@
-import { IUseCase } from '../../shared/application/use-case-interface';
-import { NotFoundError } from '../../shared/domain/errors/not-found.error';
-import { Uuid } from '../../shared/domain/value-objects/uuid.vo';
-import { Category } from '../domain/category.entity';
-import { ICategoryRepository } from '../domain/category.repository.interface';
+import { IUseCase } from '../../../shared/application/use-case-interface';
+import { NotFoundError } from '../../../shared/domain/errors/not-found.error';
+import { Uuid } from '../../../shared/domain/value-objects/uuid.vo';
+import { Category } from '../../domain/category.entity';
+import { ICategoryRepository } from '../../domain/category.repository.interface';
+import { CategoryOutput, CategoryOutputMapper } from './common/category-output';
 
 type Input = {
   id: string;
@@ -11,13 +12,7 @@ type Input = {
   is_active?: boolean;
 };
 
-type Output = {
-  id: string;
-  name: string;
-  description: string | null;
-  is_active: boolean;
-  created_at: Date;
-};
+type Output = CategoryOutput;
 
 export class UpdateCategoryUseCase implements IUseCase<Input, Output> {
   constructor(private readonly repository: ICategoryRepository) {}
@@ -29,13 +24,7 @@ export class UpdateCategoryUseCase implements IUseCase<Input, Output> {
 
     await this.repository.update(changed);
 
-    return {
-      id: changed.category_id.value,
-      name: changed.name,
-      description: changed.description,
-      is_active: changed.is_active,
-      created_at: changed.created_at,
-    };
+    return CategoryOutputMapper.toOutput(changed);
   }
 
   private change(category: Category, input: Input): Category {
