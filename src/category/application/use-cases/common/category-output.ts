@@ -10,11 +10,11 @@ export type CategoryOutput = {
 
 export class CategoryOutputMapper {
   static toOutput(entity: Category): CategoryOutput {
-    const { category_id: id, ...props } = entity.toJSON();
+    const { category_id, ...props } = entity.toJSON();
 
     return {
       ...props,
-      id,
+      id: category_id,
     };
   }
 }

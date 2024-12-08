@@ -34,7 +34,7 @@ export class SearchResult<E extends Entity = Entity> extends ValueObject {
     };
   }
 
-  entitiesToJSON(entities: Entity[]) {
+  private entitiesToJSON(entities: Entity[]) {
     return entities.map(entity => entity.toJSON());
   }
 }
