@@ -1,14 +1,17 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString, Max, MaxLength, validateSync } from 'class-validator';
+import { IsNumber, IsString, Max, MaxLength } from 'class-validator';
 import { Category } from './category.entity';
 import { ClassValidatorFields } from '../../shared/domain/validators/class-validator-fields';
 import { Notification } from '../../shared/validators/notification';
+import { plainToClass, plainToInstance } from 'class-transformer';
 
 export class CategoryRules {
-  @MaxLength(255, { groups: ['name'] })
+  @MaxLength(255, {
+    groups: ['name'],
+  })
   name: string;
 
   constructor(category: Category) {
-    Object.assign(this, category);
+    Object.assign(this, plainToInstance(CategoryRules, category));
   }
 }
 

@@ -1,16 +1,17 @@
 export class Notification {
-  errors = new Map<string, string[] | string>();
+  errors = new Map<string, string[]>();
 
   add(error: string, field?: string) {
     if (field) {
       this.addWithField(error, field);
     } else {
-      this.errors.set(error, error);
+      this.errors.set(error, [error]);
     }
   }
 
   private addWithField(error: string, field: string) {
     if (!this.errors.has(field)) {
+      this.errors.set(field, [error]);
       return;
     }
 
@@ -26,11 +27,11 @@ export class Notification {
     }
 
     if (Array.isArray(error)) {
-      error.forEach(value => this.errors.set(value, value));
+      error.forEach(value => this.errors.set(value, [value]));
       return;
     }
 
-    this.errors.set(error, error);
+    this.errors.set(error, [error]);
   }
 
   hasErrors(): boolean {
