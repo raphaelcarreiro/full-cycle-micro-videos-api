@@ -5,7 +5,7 @@ import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
 import { CategoryRepository } from '../../../../infra/db/sequelize/category.repository';
 import { setupSequelize } from '../../../../infra/testing/helpers';
 import { CategoryOutputMapper } from '../../common/category-output';
-import { GetCategoriesUseCase } from '../../get-categories.use-case';
+import { GetCategoriesUseCase } from '../get-categories.use-case';
 
 describe('GetCategoriesUseCase Unit Tests', () => {
   setupSequelize({ models: [CategoryModel] });

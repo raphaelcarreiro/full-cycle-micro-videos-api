@@ -1,16 +1,13 @@
-import { IUseCase } from '../../../shared/application/use-case-interface';
-import { NotFoundError } from '../../../shared/domain/errors/not-found.error';
-import { Uuid } from '../../../shared/domain/value-objects/uuid.vo';
-import { Category } from '../../domain/category.entity';
-import { ICategoryRepository } from '../../domain/category.repository.interface';
-import { CategoryOutput, CategoryOutputMapper } from './common/category-output';
+import { IUseCase } from '../../../../shared/application/use-case-interface';
+import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
+import { EntityValidationError } from '../../../../shared/domain/validators/validation.error';
+import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
+import { Category } from '../../../domain/category.entity';
+import { ICategoryRepository } from '../../../domain/category.repository.interface';
+import { CategoryOutput, CategoryOutputMapper } from '../common/category-output';
+import { UpdateCategoryInput } from './update-category.input';
 
-type Input = {
-  id: string;
-  name?: string;
-  description?: string | null;
-  is_active?: boolean;
-};
+type Input = UpdateCategoryInput;
 
 type Output = CategoryOutput;
 
@@ -21,6 +18,10 @@ export class UpdateCategoryUseCase implements IUseCase<Input, Output> {
     const category = await this.find(input.id);
 
     const changed = this.change(category, input);
+
+    if (category.notification.hasErrors()) {
+      throw new EntityValidationError(category.notification.toJSON());
+    }
 
     await this.repository.update(changed);
 

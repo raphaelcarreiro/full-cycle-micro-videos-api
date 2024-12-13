@@ -1,8 +1,9 @@
+import { EntityValidationError } from '../../../../../shared/domain/validators/validation.error';
 import { Uuid } from '../../../../../shared/domain/value-objects/uuid.vo';
 import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
 import { CategoryRepository } from '../../../../infra/db/sequelize/category.repository';
 import { setupSequelize } from '../../../../infra/testing/helpers';
-import { CreateCategoryUseCase } from '../../create-category.use-case';
+import { CreateCategoryUseCase } from '../create-category.use-case';
 
 describe('CreateCategoryUseCase Integration Tests', () => {
   setupSequelize({ models: [CategoryModel] });
@@ -59,5 +60,9 @@ describe('CreateCategoryUseCase Integration Tests', () => {
       is_active: entity.is_active,
       created_at: entity.created_at,
     });
+  });
+
+  it('should throw an error when creating a category with invalid data', async () => {
+    await expect(usecase.execute({ name: 5 as any })).rejects.toThrow(EntityValidationError);
   });
 });

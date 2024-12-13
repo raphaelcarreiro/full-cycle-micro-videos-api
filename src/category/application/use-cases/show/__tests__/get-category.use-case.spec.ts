@@ -1,19 +1,15 @@
 import { NotFoundError } from '../../../../../shared/domain/errors/not-found.error';
 import { Uuid } from '../../../../../shared/domain/value-objects/uuid.vo';
 import { Category } from '../../../../domain/category.entity';
-import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
-import { CategoryRepository } from '../../../../infra/db/sequelize/category.repository';
-import { setupSequelize } from '../../../../infra/testing/helpers';
-import { GetCategoryUseCase } from '../../get-category.use-case';
+import { CategoryInMemoryRepository } from '../../../../infra/db/in-memory/category-in-memory.repository';
+import { GetCategoryUseCase } from '../../show/get-category.use-case';
 
-describe('GetCategoryUseCase Integration Tests', () => {
-  setupSequelize({ models: [CategoryModel] });
-
+describe('GetCategoryUseCase Unit Tests', () => {
   let usecase: GetCategoryUseCase;
-  let repository: CategoryRepository;
+  let repository: CategoryInMemoryRepository;
 
   beforeEach(() => {
-    repository = new CategoryRepository(CategoryModel);
+    repository = new CategoryInMemoryRepository();
     usecase = new GetCategoryUseCase(repository);
   });
 
@@ -23,9 +19,9 @@ describe('GetCategoryUseCase Integration Tests', () => {
     await repository.insert(category);
 
     const spyOn = jest.spyOn(repository, 'findById');
-    const output = await usecase.execute({ id: category.category_id.value });
+    const response = await usecase.execute({ id: category.category_id.value });
 
-    expect(output).toStrictEqual({
+    expect(response).toStrictEqual({
       id: category.category_id.value,
       name: category.name,
       description: category.description,

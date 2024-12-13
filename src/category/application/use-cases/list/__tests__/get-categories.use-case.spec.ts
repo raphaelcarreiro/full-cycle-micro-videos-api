@@ -2,7 +2,7 @@ import { Category } from '../../../../domain/category.entity';
 import { CategorySearchParams } from '../../../../domain/category.repository.interface';
 import { CategoryInMemoryRepository } from '../../../../infra/db/in-memory/category-in-memory.repository';
 import { CategoryOutputMapper } from '../../common/category-output';
-import { GetCategoriesUseCase } from '../../get-categories.use-case';
+import { GetCategoriesUseCase } from '../../list/get-categories.use-case';
 
 describe('GetCategoriesUseCase Unit Tests', () => {
   let usecase: GetCategoriesUseCase;
