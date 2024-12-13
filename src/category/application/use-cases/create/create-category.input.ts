@@ -13,11 +13,11 @@ export class CreateCategoryInput {
 
   @IsString()
   @IsOptional()
-  description: string | null;
+  description?: string | null;
 
   @IsBoolean()
   @IsOptional()
-  is_active: boolean;
+  is_active?: boolean;
 
   constructor(payload: Payload) {
     this.name = payload.name;
