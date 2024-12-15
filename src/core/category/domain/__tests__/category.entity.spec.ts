@@ -1,6 +1,5 @@
 import { Uuid } from '../../../shared/domain/value-objects/uuid.vo';
 import { Category } from '../category.entity';
-import { CategoryValidator } from '../category.validator';
 
 describe('Category unit tests', () => {
   beforeEach(() => {
@@ -8,7 +7,7 @@ describe('Category unit tests', () => {
   });
 
   test('should create a category with name prop', () => {
-    let category = Category.create({
+    const category = Category.create({
       name: 'Movie',
     });
 

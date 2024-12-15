@@ -1,3 +1,5 @@
+import {} from 'jest';
+
 declare global {
   namespace jest {
     interface Matchers<R> {
