@@ -17,7 +17,10 @@ export type DB_SCHEMA_TYPE = {
 export const CONFIG_DB_SCHEMA: Joi.StrictSchemaMap<DB_SCHEMA_TYPE> = {
   DB_VENDOR: Joi.string().required().valid('mysql', 'sqlite'),
   DB_HOST: Joi.string().required(),
-  DB_PORT: Joi.number().required(),
+  DB_PORT: Joi.number().integer().when('DB_VENDOR', {
+    is: 'mysql',
+    then: Joi.required(),
+  }),
   DB_USERNAME: Joi.string().when('DB_VENDOR', {
     is: 'mysql',
     then: Joi.string().required(),
