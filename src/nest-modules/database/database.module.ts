@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { DB_SCHEMA_TYPE } from 'src/config/config.module';
+import { DB_SCHEMA_TYPE } from 'src/nest-modules/config/config.module';
 
 @Module({
   imports: [
