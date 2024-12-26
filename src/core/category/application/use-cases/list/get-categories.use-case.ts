@@ -9,7 +9,7 @@ import {
 } from '../../../domain/category.repository.interface';
 import { CategoryOutput, CategoryOutputMapper } from '../common/category-output';
 
-type Input = {
+export type Input = {
   filter?: CategoryFilter;
   page: number;
   per_page?: number;

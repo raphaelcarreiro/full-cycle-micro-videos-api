@@ -1,4 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Inject } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Inject,
+  ParseUUIDPipe,
+  HttpCode,
+  Query,
+} from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CreateCategoryUseCase } from '@core/category/application/use-cases/create/create-category.use-case';
@@ -6,8 +18,10 @@ import { UpdateCategoryUseCase } from '@core/category/application/use-cases/upda
 import { DeleteCategoryUseCase } from '@core/category/application/use-cases/delete/delete-category.use-case';
 import { GetCategoryUseCase } from '@core/category/application/use-cases/show/get-category.use-case';
 import { GetCategoriesUseCase } from '@core/category/application/use-cases/list/get-categories.use-case';
-import { CategoriesPresenter } from './categories.presenter';
+import { CategoriesPresenter, CategoryCollectionPresenter } from './categories.presenter';
 import { CategoryOutput } from '@core/category/application/use-cases/common/category-output';
+import { GetCategoriesDto } from './dto/get-categories.dto';
+import { PaginationOutput } from '@core/shared/application/pagination-output';
 
 @Controller('categories')
 export class CategoriesController {
@@ -33,23 +47,36 @@ export class CategoriesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id', new ParseUUIDPipe({ errorHttpStatusCode: 422 })) id: string) {
     const output = await this.getCategoryUseCase.execute({ id });
     return this.serialize(output);
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
+  async update(
+    @Param('id', new ParseUUIDPipe({ errorHttpStatusCode: 422 })) id: string,
+    @Body() updateCategoryDto: UpdateCategoryDto,
+  ) {
     const output = await this.updateUseCase.execute({ id, ...updateCategoryDto });
     return this.serialize(output);
   }
 
+  @HttpCode(204)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.deleteUseCase.execute({ id });
+  async remove(@Param('id', new ParseUUIDPipe({ errorHttpStatusCode: 422 })) id: string) {
+    return await this.deleteUseCase.execute({ id });
+  }
+
+  async search(@Query() query: GetCategoriesDto) {
+    const output = await this.getCategoriesUseCase.execute(query);
+    return this.serializeCollection(output);
   }
 
   private serialize(output: CategoryOutput) {
     return new CategoriesPresenter(output);
+  }
+
+  private serializeCollection(output: PaginationOutput<CategoryOutput>) {
+    return new CategoryCollectionPresenter(output);
   }
 }
