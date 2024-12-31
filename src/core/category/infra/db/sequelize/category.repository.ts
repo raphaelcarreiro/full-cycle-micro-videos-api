@@ -18,6 +18,7 @@ export class CategoryRepository implements ICategoryRepository {
 
   async insert(entity: Category): Promise<void> {
     const category = CategoryModelMapper.toModel(entity);
+
     await category.save();
   }
 

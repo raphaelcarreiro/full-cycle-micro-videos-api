@@ -11,7 +11,7 @@ import { CategoryOutput, CategoryOutputMapper } from '../common/category-output'
 
 export type Input = {
   filter?: CategoryFilter;
-  page: number;
+  page?: number;
   per_page?: number;
   sort_dir?: SortDirection;
   sort?: string;

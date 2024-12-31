@@ -15,7 +15,9 @@ import { DB_SCHEMA_TYPE } from 'src/nest-modules/config/config.module';
             storage: config.get('DB_DATABASE'),
             logging: config.get('DB_LOGGING'),
             autoLoadModels: config.get('DB_AUTO_LOAD_MODELS'),
-            synchronize: true,
+            sync: {
+              force: true,
+            },
           };
         }
 
@@ -29,7 +31,6 @@ import { DB_SCHEMA_TYPE } from 'src/nest-modules/config/config.module';
             database: config.get('DB_DATABASE'),
             logging: config.get('DB_LOGGING'),
             autoLoadModels: config.get('DB_AUTO_LOAD_MODELS'),
-            synchronize: true,
           };
         }
 

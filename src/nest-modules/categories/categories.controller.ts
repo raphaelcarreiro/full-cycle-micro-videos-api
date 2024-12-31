@@ -18,10 +18,11 @@ import { UpdateCategoryUseCase } from '@core/category/application/use-cases/upda
 import { DeleteCategoryUseCase } from '@core/category/application/use-cases/delete/delete-category.use-case';
 import { GetCategoryUseCase } from '@core/category/application/use-cases/show/get-category.use-case';
 import { GetCategoriesUseCase } from '@core/category/application/use-cases/list/get-categories.use-case';
-import { CategoriesPresenter, CategoryCollectionPresenter } from './categories.presenter';
+import { CategoryPresenter } from './category.presenter';
 import { CategoryOutput } from '@core/category/application/use-cases/common/category-output';
 import { GetCategoriesDto } from './dto/get-categories.dto';
 import { PaginationOutput } from '@core/shared/application/pagination-output';
+import { CategoryCollectionPresenter } from './category-collection.presenter';
 
 @Controller('categories')
 export class CategoriesController {
@@ -69,11 +70,12 @@ export class CategoriesController {
 
   async search(@Query() query: GetCategoriesDto) {
     const output = await this.getCategoriesUseCase.execute(query);
+
     return this.serializeCollection(output);
   }
 
   private serialize(output: CategoryOutput) {
-    return new CategoriesPresenter(output);
+    return new CategoryPresenter(output);
   }
 
   private serializeCollection(output: PaginationOutput<CategoryOutput>) {

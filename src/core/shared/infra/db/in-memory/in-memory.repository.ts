@@ -1,12 +1,10 @@
-import { Entity } from "../../../domain/entity";
-import { NotFoundError } from "../../../domain/errors/not-found.error";
-import { IRepository } from "../../../domain/repository/repository.interface";
-import { ValueObject } from "../../../domain/value-object";
+import { Entity } from '../../../domain/entity';
+import { NotFoundError } from '../../../domain/errors/not-found.error';
+import { IRepository } from '../../../domain/repository/repository.interface';
+import { ValueObject } from '../../../domain/value-object';
 
-export abstract class InMemoryRepository<
-  E extends Entity,
-  EntityId extends ValueObject
-> implements IRepository<E, EntityId>
+export abstract class InMemoryRepository<E extends Entity, EntityId extends ValueObject>
+  implements IRepository<E, EntityId>
 {
   items: E[] = [];
 
@@ -25,7 +23,7 @@ export abstract class InMemoryRepository<
       throw new NotFoundError(entity.entity_id, this.getEntity());
     }
 
-    this.items = this.items.map((item) => {
+    this.items = this.items.map(item => {
       if (item.entity_id.equals(entity.entity_id)) {
         return entity;
       }
@@ -41,11 +39,11 @@ export abstract class InMemoryRepository<
       throw new NotFoundError(entityId, this.getEntity());
     }
 
-    this.items = this.items.filter((item) => !item.entity_id.equals(entityId));
+    this.items = this.items.filter(item => !item.entity_id.equals(entityId));
   }
 
   async findById(entityId: EntityId | ValueObject): Promise<E | null> {
-    const item = this.items.find((item) => item.entity_id.equals(entityId));
+    const item = this.items.find(item => item.entity_id.equals(entityId));
 
     if (!item) {
       return null;
