@@ -1,0 +1,10 @@
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+  "name": "Movie",
+  "description": "Movie description"
+}
+
+###
+GET http://localhost:3000/categories/d4038c99-6aa6-49d0-a0f9-ab23836eb9d0

@@ -20,9 +20,9 @@ export class CreateCategoryInput {
   is_active?: boolean;
 
   constructor(payload: Payload) {
-    this.name = payload.name;
-    this.description = payload.description;
-    this.is_active = payload.is_active;
+    this.name = payload?.name;
+    this.description = payload?.description;
+    this.is_active = payload?.is_active;
   }
 }
 

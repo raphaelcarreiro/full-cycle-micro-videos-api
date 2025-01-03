@@ -313,11 +313,11 @@ export class ListCategoriesFixture {
     const faker = Category.fake().aCategory();
 
     const entitiesMap = {
-      a: faker.withName('a').build(),
-      AAA: faker.withName('AAA').build(),
-      AaA: faker.withName('AaA').build(),
-      b: faker.withName('b').build(),
-      c: faker.withName('c').build(),
+      movie: faker.withName('Movie').build(),
+      serie: faker.withName('Serie').build(),
+      novel: faker.withName('Novel').build(),
+      anime: faker.withName('Anime').build(),
+      miniserie: faker.withName('Mini Serie').build(),
     };
 
     const arrange = [
@@ -329,11 +329,11 @@ export class ListCategoriesFixture {
           filter: 'a',
         },
         expected: {
-          entities: [entitiesMap.AAA, entitiesMap.AaA],
+          entities: [entitiesMap.anime],
           meta: {
-            total: 3,
+            total: 1,
             current_page: 1,
-            last_page: 2,
+            last_page: 1,
             per_page: 2,
           },
         },
@@ -346,7 +346,7 @@ export class ListCategoriesFixture {
           filter: 'a',
         },
         expected: {
-          entities: [entitiesMap.a],
+          entities: [entitiesMap.anime],
           meta: {
             total: 3,
             current_page: 2,

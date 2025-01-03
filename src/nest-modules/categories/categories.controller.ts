@@ -68,6 +68,7 @@ export class CategoriesController {
     return await this.deleteUseCase.execute({ id });
   }
 
+  @Get()
   async search(@Query() query: GetCategoriesDto) {
     const output = await this.getCategoriesUseCase.execute(query);
 
