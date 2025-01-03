@@ -224,6 +224,17 @@ const config: Config = {
       statements: 80,
     },
   },
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '.interface.ts',
+    'shared/testing',
+    'shared-module/testing',
+    'validator-rules.ts',
+    '.fixture.ts',
+    '.input.ts',
+    '.d.ts',
+    '.dto.ts',
+  ],
 };
 
 export default config;
