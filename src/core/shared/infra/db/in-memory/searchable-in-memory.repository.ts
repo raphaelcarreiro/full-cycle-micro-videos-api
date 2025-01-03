@@ -43,9 +43,7 @@ export abstract class SearchableInMemoryRepository<E extends Entity, EntityId ex
     }
 
     return [...items].sort((a, b) => {
-      //@ts-ignore
       const _a = customGetter ? customGetter(sort, a) : a[sort];
-      //@ts-ignore
       const _b = customGetter ? customGetter(sort, b) : b[sort];
 
       if (_a > _b) {
