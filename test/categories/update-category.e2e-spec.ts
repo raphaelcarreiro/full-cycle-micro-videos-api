@@ -3,7 +3,7 @@ import { instanceToPlain } from 'class-transformer';
 import { CategoryOutputMapper } from '../../src/core/category/application/use-cases/common/category-output';
 import { Uuid } from '../../src/core/shared/domain/value-objects/uuid.vo';
 import { startApp } from 'src/nest-modules/shared/testing/helpers';
-import { Category } from '@core/category/domain/category.entity';
+import { Category } from '@core/category/domain/category.aggregate';
 import { UpdateCategoryFixture } from 'src/nest-modules/categories/testing/category.fixture';
 import { ICategoryRepository } from '@core/category/domain/category.repository.interface';
 import { CATEGORY_PROVIDERS } from 'src/nest-modules/categories/categories-providers';

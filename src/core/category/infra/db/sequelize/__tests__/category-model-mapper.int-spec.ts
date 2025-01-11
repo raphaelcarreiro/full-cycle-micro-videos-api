@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { CategoryModel } from '../category.model';
 import { CategoryModelMapper } from '../category-model-mapper';
 import { Uuid } from '../../../../../shared/domain/value-objects/uuid.vo';
-import { Category } from '../../../../domain/category.entity';
+import { Category } from '../../../../domain/category.aggregate';
 import { setupSequelize } from '../../../testing/helpers';
 
 describe('CategoryModelMapper tests', () => {

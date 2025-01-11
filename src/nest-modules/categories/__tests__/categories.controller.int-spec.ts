@@ -13,7 +13,7 @@ import { UpdateCategoryUseCase } from '@core/category/application/use-cases/upda
 import { Uuid } from '@core/shared/domain/value-objects/uuid.vo';
 import { CreateCategoryFixture, ListCategoriesFixture, UpdateCategoryFixture } from '../testing/category.fixture';
 import { CategoryPresenter } from '../category.presenter';
-import { Category } from '@core/category/domain/category.entity';
+import { Category } from '@core/category/domain/category.aggregate';
 import { CategoryCollectionPresenter } from '../category-collection.presenter';
 import { CategoryOutputMapper } from '@core/category/application/use-cases/common/category-output';
 

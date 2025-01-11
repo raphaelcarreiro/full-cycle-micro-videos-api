@@ -1,7 +1,7 @@
 import { SearchParams } from '../../../../shared/domain/repository/search-params';
 import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
 import { SearchableInMemoryRepository } from '../../../../shared/infra/db/in-memory/searchable-in-memory.repository';
-import { Category } from '../../../domain/category.entity';
+import { Category } from '../../../domain/category.aggregate';
 import { ICategoryRepository } from '../../../domain/category.repository.interface';
 
 export class CategoryInMemoryRepository

@@ -1,4 +1,4 @@
-import { Category } from '../../../../domain/category.entity';
+import { Category } from '../../../../domain/category.aggregate';
 import { CategorySearchParams } from '../../../../domain/category.repository.interface';
 import { CategoryInMemoryRepository } from '../../../../infra/db/in-memory/category-in-memory.repository';
 import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
