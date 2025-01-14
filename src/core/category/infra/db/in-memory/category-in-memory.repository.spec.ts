@@ -64,7 +64,7 @@ describe('CategoryInMemoryRepository tests', () => {
     expect(filtered).toStrictEqual([items[1], items[0], items[2]]);
   });
 
-  it('should sort asc when sortDir is null', async () => {
+  it('should sort desc when sortDir is null', async () => {
     const items = [
       Category.fake().aCategory().withName('category b').build(),
       Category.fake().aCategory().withName('category a').build(),
