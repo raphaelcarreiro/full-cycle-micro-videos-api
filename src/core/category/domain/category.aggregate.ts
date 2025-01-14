@@ -1,5 +1,4 @@
 import { AggregateRoot } from '@core/shared/domain/aggregate-root';
-import { Entity } from '../../shared/domain/entity';
 import { Uuid } from '../../shared/domain/value-objects/uuid.vo';
 import { CategoryFakeBuilder } from './category-fake.builder';
 import { CategoryValidatorFactory } from './category.validator';
@@ -18,8 +17,10 @@ export type CategoryCreateCommand = {
   is_active?: boolean;
 };
 
+export class CategoryId extends Uuid {}
+
 export class Category extends AggregateRoot {
-  category_id: Uuid;
+  category_id: CategoryId;
   name: string;
   description: string | null;
   is_active: boolean;
