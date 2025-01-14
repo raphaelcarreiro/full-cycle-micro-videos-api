@@ -1,5 +1,5 @@
 import { ValueObject } from '../../domain/value-object';
-import { Notification } from '../../validators/notification';
+import { Notification } from '../../domain/validators/notification';
 
 expect.extend({
   notificationContainsErrorMessages(expected: Notification, received: Array<string | { [key: string]: string[] }>) {
