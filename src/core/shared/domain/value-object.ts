@@ -6,7 +6,7 @@ export abstract class ValueObject {
       return false;
     }
 
-    if (value.constructor !== this.constructor) {
+    if (value.constructor.name !== this.constructor.name) {
       return false;
     }
 
