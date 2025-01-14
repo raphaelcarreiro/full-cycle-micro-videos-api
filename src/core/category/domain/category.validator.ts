@@ -1,7 +1,7 @@
-import { IsNumber, IsString, Max, MaxLength } from 'class-validator';
+import { MaxLength } from 'class-validator';
 import { Category } from './category.aggregate';
 import { ClassValidatorFields } from '../../shared/domain/validators/class-validator-fields';
-import { Notification } from '../../shared/validators/notification';
+import { Notification } from '../../shared/domain/validators/notification';
 
 export class CategoryRules {
   @MaxLength(255, {
