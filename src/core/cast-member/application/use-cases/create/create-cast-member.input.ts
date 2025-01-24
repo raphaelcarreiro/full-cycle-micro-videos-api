@@ -11,7 +11,6 @@ export class CreateCastMemberInput {
   @IsNotEmpty()
   name: string;
 
-  @IsString()
   @IsEnum(CastMemberType)
   type: CastMemberType;
 
