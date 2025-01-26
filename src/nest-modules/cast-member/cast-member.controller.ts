@@ -70,7 +70,16 @@ export class CastMemberController {
 
   @Get()
   async search(@Query() query: GetCastMembersDto) {
-    const output = await this.searchUseCase.execute(query);
+    const output = await this.searchUseCase.execute({
+      filter: {
+        name: query.filter,
+        type: query.type,
+      },
+      page: query.page,
+      per_page: query.per_page,
+      sort_dir: query.sort_dir,
+      sort: query.sort,
+    });
 
     return this.serializeCollection(output);
   }

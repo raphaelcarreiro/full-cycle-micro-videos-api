@@ -1,4 +1,4 @@
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { CastMemberModel } from './cast-member.model';
 
 export class CastMemberModelMapper {

@@ -4,7 +4,7 @@ import {
   ICastMemberRepository,
 } from '@core/cast-member/domain/cast-member.repository.interface';
 import { CastMemberModel } from './cast-member.model';
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { CastMemberModelMapper } from './cast-member-model-mapper';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 import { WhereOptions } from 'sequelize';
@@ -95,13 +95,19 @@ export class CastMemberRepository implements ICastMemberRepository {
   }
 
   private getSearchWhere(props: CastMemberSearchParams): WhereOptions | undefined {
-    if (props.filter) {
-      return {
-        name: {
-          [Op.like]: `%${props.filter}%`,
-        },
+    const filter: WhereOptions = {};
+
+    if (props.filter?.name) {
+      filter.name = {
+        [Op.like]: `%${props.filter.name}%`,
       };
     }
+
+    if (props.filter?.type) {
+      filter.type = props.filter.type;
+    }
+
+    return filter;
   }
 
   private async _get(id: string) {

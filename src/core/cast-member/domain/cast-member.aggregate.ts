@@ -1,7 +1,7 @@
-import { Entity } from '@core/shared/domain/entity';
 import { Uuid } from '@core/shared/domain/value-objects/uuid.vo';
 import { CastMemberValidator } from './validation/cast-member.validator';
 import { CastMemberFakeBuilder } from './cast-member-fake.builder';
+import { AggregateRoot } from '@core/shared/domain/aggregate-root';
 
 export type CastMemberConstructorProps = {
   cast_member_id?: CastMemberId;
@@ -22,7 +22,7 @@ export enum CastMemberType {
 
 export class CastMemberId extends Uuid {}
 
-export class CastMember extends Entity {
+export class CastMember extends AggregateRoot {
   cast_member_id: CastMemberId;
   name: string;
   type: CastMemberType;

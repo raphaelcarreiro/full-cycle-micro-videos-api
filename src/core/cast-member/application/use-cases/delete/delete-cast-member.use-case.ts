@@ -1,4 +1,4 @@
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { ICastMemberRepository } from '@core/cast-member/domain/cast-member.repository.interface';
 import { IUseCase } from '@core/shared/application/use-case-interface';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';

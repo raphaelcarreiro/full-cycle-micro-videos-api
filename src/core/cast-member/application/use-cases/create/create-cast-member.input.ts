@@ -1,4 +1,4 @@
-import { CastMemberType } from '@core/cast-member/domain/cast-member.entity';
+import { CastMemberType } from '@core/cast-member/domain/cast-member.aggregate';
 import { IsEnum, IsNotEmpty, IsString, validateSync } from 'class-validator';
 
 type Payload = {

@@ -1,7 +1,7 @@
 import { IUseCase } from '@core/shared/application/use-case-interface';
 import { CastMemberOutput, CastMemberOutputMapper } from '../common/cast-member-output';
 import { ICastMemberRepository } from '@core/cast-member/domain/cast-member.repository.interface';
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 
 type Input = {

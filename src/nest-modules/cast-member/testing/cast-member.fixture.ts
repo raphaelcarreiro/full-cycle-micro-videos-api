@@ -1,4 +1,4 @@
-import { CastMember, CastMemberType } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberType } from '@core/cast-member/domain/cast-member.aggregate';
 
 const _keysInResponse = ['id', 'name', 'type', 'created_at'];
 
@@ -309,11 +309,11 @@ export class ListCastMemberFixture {
     const faker = CastMember.fake().aCastMember();
 
     const entitiesMap = {
-      movie: faker.withName('Movie').build(),
-      serie: faker.withName('Serie').build(),
-      novel: faker.withName('Novel').build(),
-      anime: faker.withName('Anime').build(),
-      miniserie: faker.withName('Mini Serie').build(),
+      mayara: faker.withName('mayara').withType(CastMemberType.actor).build(),
+      carreiro: faker.withName('carreiro').withType(CastMemberType.director).build(),
+      jorge: faker.withName('jorge').withType(CastMemberType.director).build(),
+      susi: faker.withName('susi').withType(CastMemberType.actor).build(),
+      camila: faker.withName('camila').withType(CastMemberType.actor).build(),
     };
 
     const arrange = [
@@ -322,10 +322,11 @@ export class ListCastMemberFixture {
           page: 1,
           per_page: 2,
           sort: 'name',
-          filter: 'a',
+          filter: 'car',
+          type: 1,
         },
         expected: {
-          entities: [entitiesMap.anime],
+          entities: [entitiesMap.carreiro],
           meta: {
             total: 1,
             current_page: 1,
@@ -336,16 +337,34 @@ export class ListCastMemberFixture {
       },
       {
         send_data: {
-          page: 2,
-          per_page: 2,
+          page: 1,
+          per_page: 5,
           sort: 'name',
-          filter: 'a',
+          filter: 'carreiro',
+          type: 2,
         },
         expected: {
-          entities: [entitiesMap.anime],
+          entities: [],
+          meta: {
+            total: 0,
+            current_page: 1,
+            last_page: 0,
+            per_page: 5,
+          },
+        },
+      },
+      {
+        send_data: {
+          page: 1,
+          per_page: 2,
+          sort: 'name',
+          type: 2,
+        },
+        expected: {
+          entities: [entitiesMap.camila, entitiesMap.mayara],
           meta: {
             total: 3,
-            current_page: 2,
+            current_page: 1,
             last_page: 2,
             per_page: 2,
           },

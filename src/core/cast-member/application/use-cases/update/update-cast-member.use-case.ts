@@ -3,7 +3,7 @@ import { CastMemberOutput, CastMemberOutputMapper } from '../common/cast-member-
 import { UpdateCastMemberInput } from './update-cast-member.input';
 import { ICastMemberRepository } from '@core/cast-member/domain/cast-member.repository.interface';
 import { EntityValidationError } from '@core/shared/domain/validators/validation.error';
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 
 type Input = UpdateCastMemberInput;

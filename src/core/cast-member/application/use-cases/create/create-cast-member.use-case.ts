@@ -2,7 +2,7 @@ import { IUseCase } from '@core/shared/application/use-case-interface';
 import { CastMemberOutput, CastMemberOutputMapper } from '../common/cast-member-output';
 import { CreateCastMemberInput } from './create-cast-member.input';
 import { ICastMemberRepository } from '@core/cast-member/domain/cast-member.repository.interface';
-import { CastMember } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember } from '@core/cast-member/domain/cast-member.aggregate';
 import { EntityValidationError } from '@core/shared/domain/validators/validation.error';
 
 type Input = CreateCastMemberInput;
