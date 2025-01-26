@@ -52,7 +52,7 @@ describe('CastMemberController (e2e)', () => {
       await repository.bulkInsert(Object.values(entitiesMap));
     });
 
-    test.each([arrange[0]])('when query params is $send_data', async ({ send_data, expected }) => {
+    test.each(arrange)('when query params is $send_data', async ({ send_data, expected }) => {
       const query = new URLSearchParams(send_data as any).toString();
 
       await request(helper.app.getHttpServer())

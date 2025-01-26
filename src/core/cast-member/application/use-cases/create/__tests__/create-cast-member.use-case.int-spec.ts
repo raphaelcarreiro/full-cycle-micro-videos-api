@@ -2,7 +2,7 @@ import { CastMemberModel } from '@core/cast-member/infra/db/sequelize/cast-membe
 import { CastMemberRepository } from '@core/cast-member/infra/db/sequelize/cast-member.repository';
 import { setupSequelize } from '@core/category/infra/testing/helpers';
 import { CreateCastMemberUseCase } from '../create-cast-member.use-case';
-import { CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { EntityValidationError } from '@core/shared/domain/validators/validation.error';
 
 describe('CreateCategoryUseCase Integration Tests', () => {

@@ -3,7 +3,7 @@ import { setupSequelize } from '@core/category/infra/testing/helpers';
 import { DeleteCastMemberUseCase } from '../delete-cast-member.use-case';
 import { ICastMemberRepository } from '@core/cast-member/domain/cast-member.repository.interface';
 import { CastMemberRepository } from '@core/cast-member/infra/db/sequelize/cast-member.repository';
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 
 describe('DeleteCategoryUseCase Integration Tests', () => {

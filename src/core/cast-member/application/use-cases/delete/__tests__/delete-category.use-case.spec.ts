@@ -1,7 +1,7 @@
 import { DeleteCastMemberUseCase } from '../delete-cast-member.use-case';
 import { CastMemberInMemoryRepository } from '@core/cast-member/infra/db/in-memory/cast-member-in-memory.repository';
 import { ICastMemberRepository } from '@core/cast-member/domain/cast-member.repository.interface';
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 
 describe('DeleteCastMemberUseCase Unit Tests', () => {

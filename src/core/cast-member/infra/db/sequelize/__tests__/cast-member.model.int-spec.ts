@@ -1,7 +1,7 @@
 import { setupSequelize } from '@core/category/infra/testing/helpers';
 import { DataType } from 'sequelize-typescript';
 import { CastMemberModel } from '../cast-member.model';
-import { CastMember } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember } from '@core/cast-member/domain/cast-member.aggregate';
 
 describe('CastMemberModel integration tests', () => {
   setupSequelize({ models: [CastMemberModel] });

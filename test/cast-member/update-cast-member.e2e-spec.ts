@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { instanceToPlain } from 'class-transformer';
 import { startApp } from 'src/nest-modules/shared/testing/helpers';
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { UpdateCastMemberFixture } from 'src/nest-modules/cast-member/testing/cast-member.fixture';
 import { ICastMemberRepository } from '@core/cast-member/domain/cast-member.repository.interface';
 import { CAST_MEMBER_PROVIDERS } from 'src/nest-modules/cast-member/cast-member-providers';

@@ -1,6 +1,6 @@
 import { CastMemberInMemoryRepository } from '@core/cast-member/infra/db/in-memory/cast-member-in-memory.repository';
 import { UpdateCastMemberUseCase } from '../update-cast-member.use-case';
-import { CastMember, CastMemberType } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberType } from '@core/cast-member/domain/cast-member.aggregate';
 
 describe('UpdateCastMemberUseCase Unit Tests', () => {
   let usecase: UpdateCastMemberUseCase;

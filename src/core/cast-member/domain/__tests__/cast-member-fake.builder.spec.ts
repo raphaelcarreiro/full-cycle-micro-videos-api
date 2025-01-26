@@ -1,6 +1,6 @@
 import { Chance } from 'chance';
 import { CastMemberFakeBuilder } from '../cast-member-fake.builder';
-import { CastMemberId, CastMemberType } from '../cast-member.entity';
+import { CastMemberId, CastMemberType } from '../cast-member.aggregate';
 
 describe('CastMemberFakeBuilder Unit Tests', () => {
   describe('cast_member_id prop', () => {

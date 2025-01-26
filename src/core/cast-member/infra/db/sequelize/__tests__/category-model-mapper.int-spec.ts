@@ -1,6 +1,6 @@
 import { setupSequelize } from '@core/category/infra/testing/helpers';
 import { CastMemberModel } from '../cast-member.model';
-import { CastMember, CastMemberId, CastMemberType } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId, CastMemberType } from '@core/cast-member/domain/cast-member.aggregate';
 import { CastMemberModelMapper } from '../cast-member-model-mapper';
 
 describe('CastMemberModel tests', () => {

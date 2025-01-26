@@ -1,6 +1,6 @@
 import { CastMemberInMemoryRepository } from '@core/cast-member/infra/db/in-memory/cast-member-in-memory.repository';
 import { GetCastMemberUseCase } from '../get-cast-member.use-case';
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 
 describe('GetCastMemberUseCase Unit Tests', () => {

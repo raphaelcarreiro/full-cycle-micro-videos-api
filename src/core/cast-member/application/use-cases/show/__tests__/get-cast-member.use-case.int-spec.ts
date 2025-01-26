@@ -2,7 +2,7 @@ import { setupSequelize } from '@core/category/infra/testing/helpers';
 import { GetCastMemberUseCase } from '../get-cast-member.use-case';
 import { CastMemberModel } from '@core/cast-member/infra/db/sequelize/cast-member.model';
 import { CastMemberRepository } from '@core/cast-member/infra/db/sequelize/cast-member.repository';
-import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 
 describe('GetCastMemberUseCase Integration Tests', () => {

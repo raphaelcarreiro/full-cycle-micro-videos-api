@@ -6,7 +6,7 @@ import { CAST_MEMBER_PROVIDERS } from 'src/nest-modules/cast-member/cast-member-
 import { CreateCastMemberFixture } from 'src/nest-modules/cast-member/testing/cast-member.fixture';
 import { CastMemberPresenter } from 'src/nest-modules/cast-member/cast-member.presenter';
 import { CastMemberOutputMapper } from '@core/cast-member/application/use-cases/common/cast-member-output';
-import { CastMemberId } from '@core/cast-member/domain/cast-member.entity';
+import { CastMemberId } from '@core/cast-member/domain/cast-member.aggregate';
 
 describe('CastMemberController (e2e)', () => {
   const helper = startApp();

@@ -3,7 +3,7 @@ import { CastMemberModel } from '@core/cast-member/infra/db/sequelize/cast-membe
 import { CastMemberRepository } from '@core/cast-member/infra/db/sequelize/cast-member.repository';
 import { setupSequelize } from '@core/category/infra/testing/helpers';
 import { UpdateCastMemberUseCase } from '../update-cast-member.use-case';
-import { CastMember, CastMemberId, CastMemberType } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId, CastMemberType } from '@core/cast-member/domain/cast-member.aggregate';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 
 describe('UpdateCastMemberUseCase Integration Tests', () => {

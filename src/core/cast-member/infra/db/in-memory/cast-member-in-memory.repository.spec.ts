@@ -1,4 +1,4 @@
-import { CastMember } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember } from '@core/cast-member/domain/cast-member.aggregate';
 import { CastMemberInMemoryRepository } from './cast-member-in-memory.repository';
 
 describe('CastMemberInMemoryRepository tests', () => {
@@ -23,7 +23,7 @@ describe('CastMemberInMemoryRepository tests', () => {
       CastMember.fake().aCastMember().withName('camila').build(),
     ];
 
-    const filtered = await repository['applyFilter'](items, 'camila');
+    const filtered = await repository['applyFilter'](items, { name: 'camila' });
 
     expect(filtered).toStrictEqual([items[2]]);
   });

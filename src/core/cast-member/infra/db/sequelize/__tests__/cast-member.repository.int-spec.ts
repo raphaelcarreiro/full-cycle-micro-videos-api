@@ -1,7 +1,7 @@
 import { setupSequelize } from '@core/category/infra/testing/helpers';
 import { CastMemberModel } from '../cast-member.model';
 import { CastMemberRepository } from '../cast-member.repository';
-import { CastMember, CastMemberId, CastMemberType } from '@core/cast-member/domain/cast-member.entity';
+import { CastMember, CastMemberId, CastMemberType } from '@core/cast-member/domain/cast-member.aggregate';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 import { CastMemberSearchParams } from '@core/cast-member/domain/cast-member.repository.interface';
 
@@ -108,7 +108,7 @@ describe('CastMemberRepository integration tests', () => {
 
     await repository.bulkInsert([entity1, entity2, entity3]);
 
-    const searchResult = await repository.search(new CastMemberSearchParams({ filter: 'mayara' }));
+    const searchResult = await repository.search(new CastMemberSearchParams({ filter: { name: 'mayara' } }));
 
     expect(searchResult.items).toHaveLength(1);
     expect(searchResult.toJSON({ forceEntity: true })).toStrictEqual({
@@ -150,7 +150,9 @@ describe('CastMemberRepository integration tests', () => {
 
     const searchResult = await repository.search(
       new CastMemberSearchParams({
-        filter: 'movie',
+        filter: {
+          name: 'movie',
+        },
         per_page: 1,
         sort: 'name',
         sort_direction: 'asc',
