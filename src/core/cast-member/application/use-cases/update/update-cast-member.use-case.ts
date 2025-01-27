@@ -29,8 +29,8 @@ export class UpdateCastMemberUseCase implements IUseCase<Input, Output> {
 
   private change(castmember: CastMember, input: Input): CastMember {
     const map = {
-      name: () => castmember.changeName(input.name),
-      type: () => castmember.changeType(input.type),
+      name: () => castmember.changeName(input.name!),
+      type: () => castmember.changeType(input.type!),
     };
 
     Object.keys(input).forEach(key => {

@@ -76,7 +76,9 @@ export class CastMemberRepository implements ICastMemberRepository {
   }
 
   async search(props: CastMemberSearchParams): Promise<CastMemberSearchResult> {
-    const offset = (props.page - 1) * props.per_page;
+    const page = props.page ?? 1;
+
+    const offset = (page - 1) * props.per_page;
     const where = this.getSearchWhere(props);
 
     const { rows, count } = await this.model.findAndCountAll({
@@ -88,7 +90,7 @@ export class CastMemberRepository implements ICastMemberRepository {
 
     return new CastMemberSearchResult({
       items: rows.map(row => CastMemberModelMapper.toEntity(row)),
-      current_page: props.page,
+      current_page: page,
       per_page: props.per_page,
       total: count,
     });
