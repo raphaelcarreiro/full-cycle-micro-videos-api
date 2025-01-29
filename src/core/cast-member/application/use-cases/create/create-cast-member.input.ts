@@ -3,7 +3,7 @@ import { IsEnum, IsNotEmpty, IsString, validateSync } from 'class-validator';
 
 type Payload = {
   name: string;
-  type?: CastMemberType;
+  type: CastMemberType;
 };
 
 export class CreateCastMemberInput {
