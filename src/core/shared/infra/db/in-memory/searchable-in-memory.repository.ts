@@ -27,7 +27,9 @@ export abstract class SearchableInMemoryRepository<E extends Entity, EntityId ex
   protected abstract applyFilter(items: E[], filter: Filter | null): Promise<E[]>;
 
   protected applyPaginate(items: E[], page: SearchParams['page'], per_page: SearchParams['per_page']) {
-    const start = (page - 1) * per_page;
+    const _page = page ?? 1;
+
+    const start = (_page - 1) * per_page;
     const end = start + per_page;
     return items.slice(start, end);
   }

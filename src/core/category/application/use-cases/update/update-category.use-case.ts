@@ -30,8 +30,8 @@ export class UpdateCategoryUseCase implements IUseCase<Input, Output> {
 
   private change(category: Category, input: Input): Category {
     const map = {
-      name: () => category.changeName(input.name),
-      description: () => category.changeDescription(input.description),
+      name: () => category.changeName(input.name as string),
+      description: () => category.changeDescription(input.description as string),
       is_active: this.changeIsActive.bind(this, input.is_active, category),
     };
 

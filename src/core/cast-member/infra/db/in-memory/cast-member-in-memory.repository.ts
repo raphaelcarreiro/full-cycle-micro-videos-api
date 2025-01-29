@@ -17,7 +17,7 @@ export class CastMemberInMemoryRepository
     let _items = items;
 
     if (filter.name) {
-      _items = items.filter(item => item.name.toLowerCase().includes(filter.name.toLowerCase()));
+      _items = items.filter(item => item.name.toLowerCase().includes(filter.name!.toLowerCase()));
     }
 
     if (filter.type) {

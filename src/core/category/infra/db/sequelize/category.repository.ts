@@ -80,7 +80,9 @@ export class CategoryRepository implements ICategoryRepository {
   }
 
   async search(props: CategorySearchParams): Promise<CategorySearchResult> {
-    const offset = (props.page - 1) * props.per_page;
+    const page = props.page ?? 1;
+
+    const offset = (page - 1) * props.per_page;
     const where = this.getSearchWhere(props);
 
     const { rows, count } = await this.model.findAndCountAll({
@@ -92,7 +94,7 @@ export class CategoryRepository implements ICategoryRepository {
 
     return new CategorySearchResult({
       items: rows.map(row => CategoryModelMapper.toEntity(row)),
-      current_page: props.page,
+      current_page: page,
       per_page: props.per_page,
       total: count,
     });

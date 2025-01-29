@@ -4,7 +4,7 @@ import { ValueObject } from '../value-object';
 type SearchResultProps<E extends Entity> = {
   items: E[];
   total: number;
-  current_page: number;
+  current_page: number | null;
   per_page: number;
 };
 
@@ -19,7 +19,7 @@ export class SearchResult<E extends Entity = Entity> extends ValueObject {
     super();
     this.items = props.items;
     this.total = props.total;
-    this.current_page = props.current_page;
+    this.current_page = props.current_page ?? 0;
     this.per_page = props.per_page;
     this.last_page = Math.ceil(props.total / props.per_page);
   }

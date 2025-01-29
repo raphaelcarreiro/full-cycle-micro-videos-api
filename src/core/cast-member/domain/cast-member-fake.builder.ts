@@ -36,7 +36,7 @@ export class CastMemberFakeBuilder<TBuild = any> {
     return this;
   }
 
-  withType(valueOrFactory: PropOrFactory<CastMemberType | null>) {
+  withType(valueOrFactory: PropOrFactory<CastMemberType>) {
     this._type = valueOrFactory;
     return this;
   }
