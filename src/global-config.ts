@@ -9,6 +9,7 @@ export function applyGlobalConfig(app: INestApplication) {
     new ValidationPipe({
       errorHttpStatusCode: 422,
       stopAtFirstError: false,
+      transform: true,
     }),
   );
 
