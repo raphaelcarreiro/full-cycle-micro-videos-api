@@ -34,3 +34,7 @@ Content-Type: application/json
   "name": "Raphael",
   "type": 2
 }
+
+###
+GET http://localhost:3000/cast-members?type=2
+Content-Type: application/json
