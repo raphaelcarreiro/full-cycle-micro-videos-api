@@ -1,9 +1,10 @@
-version: '3'
+name: micro-videos-api
 
 services:
   app:
     build: .
     command: ./.docker/start.sh
+    container_name: micro-videos-app
     ports:
       - 3000:3000
     volumes:
@@ -13,6 +14,7 @@ services:
 
   db:
     image: mysql:8.0.30-debian
+    container_name: micro-videos-db
     environment:
       - MYSQL_DATABASE=micro_videos
       - MYSQL_ROOT_PASSWORD=root
