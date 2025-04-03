@@ -36,13 +36,17 @@ export class Genre extends AggregateRoot {
   }
 
   static create(props: GenreCreateCommandProps): Genre {
-    return new Genre({
+    const genre = new Genre({
       genre_id: new GenreId(),
       category_ids: new Map(props.category_ids.map(category_id => [category_id.value, category_id])),
       name: props.name,
       is_active: props.is_active ?? true,
       created_at: new Date(),
     });
+
+    genre.validate(['name']);
+
+    return genre;
   }
 
   validate(fields?: string[]) {
@@ -52,6 +56,15 @@ export class Genre extends AggregateRoot {
 
   changeName(name: string): void {
     this.name = name;
+    this.validate(['name']);
+  }
+
+  activate() {
+    this.is_active = true;
+  }
+
+  deactivate() {
+    this.is_active = false;
   }
 
   addCategoryId(category_id: CategoryId): void {
