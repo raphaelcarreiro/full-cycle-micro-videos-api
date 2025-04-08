@@ -7,7 +7,7 @@ type PropOrFactory<T> = T | ((index: number) => T);
 
 export class GenreFakeBuilder<TBuild = any> {
   private _genre_id: PropOrFactory<Uuid> | undefined = undefined;
-  private _category_ids: PropOrFactory<CategoryId[]>[] = [];
+  private _category_ids: PropOrFactory<CategoryId>[] = [];
   private _name: PropOrFactory<string> = () => this.chance.word();
   private _is_active: PropOrFactory<boolean> = () => true;
   private _created_at: PropOrFactory<Date> | undefined = undefined;
@@ -39,7 +39,7 @@ export class GenreFakeBuilder<TBuild = any> {
     return this;
   }
 
-  addCategoryId(valueOrFactory: PropOrFactory<CategoryId[]>) {
+  addCategoryId(valueOrFactory: PropOrFactory<CategoryId>) {
     this._category_ids.push(valueOrFactory);
     return this;
   }

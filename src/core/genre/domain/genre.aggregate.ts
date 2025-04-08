@@ -2,6 +2,7 @@ import { CategoryId } from '@core/category/domain/category.aggregate';
 import { AggregateRoot } from '@core/shared/domain/aggregate-root';
 import { Uuid } from '@core/shared/domain/value-objects/uuid.vo';
 import { GenreValidatorFactory } from './genre.validator';
+import { GenreFakeBuilder } from './genre-fake.builder';
 
 export type GenreConstructorProps = {
   genre_id: GenreId;
@@ -85,6 +86,10 @@ export class Genre extends AggregateRoot {
 
   get entity_id() {
     return this.genre_id;
+  }
+
+  static fake() {
+    return GenreFakeBuilder;
   }
 
   toJSON() {
